@@ -1,0 +1,27 @@
+/* General page styles */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+/* Target all child elements */
+body.dark-mode *,
+body.dark-mode *::before,
+body.dark-mode *::after {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+  border-color: #333 !important;
+}
+
+/* Links */
+body.dark-mode a {
+  color: #bb86fc !important;
+}
+body.dark-mode {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body.dark-mode img,
+body.dark-mode video {
+  filter: invert(1) hue-rotate(180deg) !important; /* Force inversion fix */
+}
