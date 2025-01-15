@@ -1,0 +1,42 @@
+/* Container */
+#popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 80px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Toggle button */
+  #toggleBtn {
+    font-size: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  
+  /* 
+     If dark mode is off, we want the popup background to be dark (#121212).
+     If dark mode is on, it should be off-white (#f2f2f2).
+     We'll dynamically apply these classes in popup.js.
+  */
+  body.dark-inactive {
+    background-color: #121212;
+  }
+  
+  body.dark-active {
+    background-color: #f2f2f2;
+  }
+
+  .some-bar-class {
+    background-image: none !important;
+    background: #1e1e1e !important;
+  }
+
+  svg {
+    filter: brightness(0.8) !important;
+  }
+  

@@ -1,27 +1,88 @@
-/* General page styles */
-body.dark-mode {
+/* dark-mode.css */
+
+/* 1) Universal page background & text */
+html, body {
   background-color: #121212 !important;
-  color: #e0e0e0 !important;
+  color: #ffffff !important;
+  /* Provide fallback fonts if desired */
+  font-family: sans-serif, Arial, Helvetica !important;
 }
 
-/* Target all child elements */
-body.dark-mode *,
-body.dark-mode *::before,
-body.dark-mode *::after {
-  background-color: #121212 !important;
-  color: #e0e0e0 !important;
-  border-color: #333 !important;
+/* 2) Make all elements transparent by default (except images & videos), 
+   ensuring no leftover white boxes. */
+* {
+  background-color: transparent !important;
+  color: inherit !important;
+  border-color: #3a3a3a !important; /* Subtle dark borders */
 }
 
-/* Links */
-body.dark-mode a {
-  color: #bb86fc !important;
-}
-body.dark-mode {
-  filter: invert(1) hue-rotate(180deg);
+/* 3) Convert known off-white or pink backgrounds to something dark:
+   - #ffffff (white), #f2f2f2 (off-white), #f5f5f5 (common light grey)
+   - Pink bars sometimes appear as #fff0f5, #ffe8ec, #ffebef, or #ffeef0 
+     (these can vary, so add your own discovered codes if needed).
+*/
+body :where(
+  [style*="#ffffff"], 
+  [style*="#FFF"], 
+  [style*="rgb(255, 255, 255)"],
+  [style*="#f2f2f2"], 
+  [style*="rgb(242, 242, 242)"],
+  [style*="#f5f5f5"], 
+  [style*="rgb(245, 245, 245)"],
+  [style*="#ffe8ec"], /* pink-ish example */
+  [style*="#ffebef"],
+  [style*="#ffeef0"],
+  [style*="#fff0f5"]
+) {
+  background-color: #1e1e1e !important;
+  color: #dddddd !important;
 }
 
-body.dark-mode img,
-body.dark-mode video {
-  filter: invert(1) hue-rotate(180deg) !important; /* Force inversion fix */
+/* 4) Make sure text is legible */
+body, body * {
+  color: #dddddd !important;
 }
+
+/* 5) Links in dark mode: subtle color that stands out */
+a {
+  color: #539bf5 !important;
+}
+
+/* 6) Images and videos must not be inverted */
+img, video {
+  filter: none !important;
+  background-color: transparent !important;
+}
+
+/* 7) Some AliExpress modules have their own wrappers; override them: 
+   e.g. commitment bars, carts, sidebars, etc.
+*/
+.commitment-bar,
+.basket, 
+.cart-icon, 
+.cart-module,
+#some-unique-cart-id,  /* If discovered via inspection */
+.product-info,
+.product-features,
+.disclaimer-module,
+.modal-wrapper,    /* AliExpress modals */
+.popup-dialog,     /* various popups or tooltips */
+.popup-dialog * {
+  background-color: #1e1e1e !important;
+  color: #dddddd !important;
+  border-color: #3a3a3a !important;
+}
+
+/* 8) Common containers (semi-broad approach):
+   The second rule prevents images, videos, & icons from being force-tinted. 
+   Instead, we rely on inherited text color for everything else.
+*/
+div, section, header, footer, nav, article, aside, main, span {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* 9) If you see leftover pink boxes or special colored modules, 
+   add them specifically here.
+   e.g., .some-pink-class { background-color: #1e1e1e !important; }
+*/
